@@ -43,11 +43,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			cartWrapper.appendChild(item);
 			if(empty) {
-				empty.remove();
+				empty.style.display = "none";
 			}
 
 			calcTotal();
 			removeFromCart();
+
+
 
 		});
 	});
@@ -86,6 +88,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	function calcGoogs(i) {
 		const items = cartWrapper.querySelectorAll('.goods__item');
 		badge.textContent = i + items.length; 
+
+		if(items.length == 0 ) {
+			let empty = cartWrapper.querySelector('.empty');
+			empty.style.display = "block";
+		}
 	}
 
 	function calcTotal() {
@@ -95,10 +102,12 @@ window.addEventListener('DOMContentLoaded', () => {
 			total += +item.textContent;
 		});
 		totalCost.textContent = total;
+
 	}
 
 	function removeFromCart() {
 		const removeBtn = cartWrapper.querySelectorAll('.goods__item-remove');
+
 		removeBtn.forEach(function(btn) {
 			btn.addEventListener('click', () => {
 				btn.parentElement.remove();
